@@ -30,16 +30,21 @@ macOS 15 (Sequoia) and later show:
 cannot verify, because the app is not signed and notarized with an Apple
 Developer ID. Nothing scanned the app and found anything in it.
 
-Apple removed the old right-click → Open shortcut in macOS 15, so use one of:
+On macOS 15 the app is not merely blocked — it is **moved to the Trash**, and
+Apple removed the old right-click → Open shortcut. Clearing the quarantine flag
+alone is not enough, because the block comes from the signature lookup rather
+than the download flag.
 
-**System Settings** — try to open the app, then go to **System Settings →
-Privacy & Security**, scroll to the bottom, and click **Open Anyway**.
-
-**Terminal** — one command, then open the app normally:
+Download **[install-macos.sh](https://github.com/Donsimeone2206/vton-realtime-downloads/raw/main/install-macos.sh)**,
+open the `.dmg`, then run:
 
 ```bash
-xattr -dr com.apple.quarantine "/Applications/VTON Realtime.app"
+bash ~/Downloads/install-macos.sh
 ```
+
+It copies the app to Applications, re-signs it locally — which changes the code
+hash and clears the block — and opens it. Read the script first if you like;
+it is a dozen lines and does nothing else.
 
 ## Virtual camera (optional)
 
