@@ -14,12 +14,32 @@ Both links always point at the newest release.
 
 ## First launch
 
-These builds are not code-signed yet, so each system will warn you once:
+These builds are not code-signed yet, so each system blocks them once.
 
-- **Windows** — SmartScreen says the publisher is unknown. Choose
-  **More info → Run anyway**.
-- **macOS** — Gatekeeper blocks it on first open. **Right-click the app →
-  Open**, then confirm.
+### Windows
+
+SmartScreen says the publisher is unknown. Choose **More info → Run anyway**.
+
+### macOS
+
+macOS 15 (Sequoia) and later show:
+
+> "VTON Realtime.app" was not opened because it contains malware.
+
+**This is not a malware detection.** macOS shows that wording for any app it
+cannot verify, because the app is not signed and notarized with an Apple
+Developer ID. Nothing scanned the app and found anything in it.
+
+Apple removed the old right-click → Open shortcut in macOS 15, so use one of:
+
+**System Settings** — try to open the app, then go to **System Settings →
+Privacy & Security**, scroll to the bottom, and click **Open Anyway**.
+
+**Terminal** — one command, then open the app normally:
+
+```bash
+xattr -dr com.apple.quarantine "/Applications/VTON Realtime.app"
+```
 
 ## Virtual camera (optional)
 
